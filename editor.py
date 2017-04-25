@@ -6,7 +6,7 @@ import unicodedata
 import re
 
 app = Flask(__name__)
-connection = MySQLdb.connect (host = '34.209.34.113', user = "abcd" , passwd = "abcd", db = "mintshowapp_live")
+connection = MySQLdb.connect (host = '*********', user = "********" , passwd = "*******", db = "***********")
 
 @app.route('/')
 def index():
