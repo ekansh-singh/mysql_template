@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+{% block content %}
+<meta http-equiv="refresh" content="120" >
+<meta charset="UTF-8">
+<!--this section contains table. not the wodden one, prices are high-->
+
+
+<script>
+
+    var table = $('#live_table').DataTable();
+    $('#live_table').on( 'keyup', function () {
+    table
+        .column(1)
+        .search( this.value )
+        .draw();
+    });
+
+
+    $('#container').css( 'display', 'block' );
+    table.columns.adjust().draw();
+    $(document).ready(function () {
+        $('#live_table').dataTable({
+	   "order": [[ 0, "asc" ]]
+           "pagingType": "full_numbers",
+           "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+           "responsive": true,
+           "scrollY"  : "650px",
+	       "scrollX"  : "100%"
+         });
+    });
+
+    $('#container').css( 'display', 'block' );
+    table.columns.adjust().draw();
+    </script>
+
+<br>
+<br>
+<div class="jumbotron" style="background-color: white; width:95%">
+<!-- -->
+
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/plug-ins/9dcbecd42ad/integration/jqueryui/dataTables.jqueryui.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/abcd/jquery-ui.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/plug-ins/9dcbecd42ad/integration/jqueryui/dataTables.jqueryui.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.4/css/jquery.dataTables.min.css">
+
+
+
+<!-- -->
+
+<script>jQuery(document).ready(function($) {
+    $(".clickable-row").click(function() {
+        window.document.location = $(this).data("href");
+    });
+});</script>
+<table id='live_table' class="table table-condensed table-striped table-hover" style="width:100%">
+
+<style>td {
+    padding: 10px;
+}</style>
+
+<style>
+.op{
+
+position:absolute;
+top:80px;
+
+}
+</style>
+
+
+        <thead>
+            <tr>
+                <th style="width:10%">ID&nbsp;&nbsp;</th>
+                <th style="width:20%">Name</th>
+		<th style="width:20%">&nbsp;&nbsp;&nbsp;&nbsp;Desc</th>
+		<th style="width:10%">&nbsp;&nbsp;</th>
+<!--
+                <th style="width:20%">Subject</th>
+		<th style="width:20%">LangID</th>
+
+-->
+            </tr>
+        </thead>
+
+
+
+
+        <tbody>
+        {% for row in keys %}
+
+            <tr class='clickable-row' data-href='/preview-edit/{{data_set[row]['ID']}}'>
+                <td>
+                    <a href="/preview-edit/{{data_set[row]['ID']}}" >
+                  <!--
+                    {% if row.csc == '200' %}
+                        <button type="button" class="btn btn-success" style="height:35px;"> {{row.id}}</button>
+                    {% else %}
+                        <button type="button" class="btn btn-danger" style="height:35px;"> {{row.id}}</button>
+                    {% endif %} -->
+                    <strong><font color="black">{{data_set[row]['ID']}}</font></strong>
+                    </a>
+                </td>
+                <td>
+                    <strong><a href="/preview-edit/{{data_set[row]['ID']}}" >{{ data_set[row]['Name'] }}</a></strong>
+                </td>
+
+	<!--	<td>
+                    <strong>{{ row['']|string }}</strong>
+                </td>-->
+
+		<td>
+                    <strong>{{ data_set[row]['Desc'] }}</strong>
+                </td>
+
+                <td>
+                    <a href="/preview-edit/{{data_set[row]['ID']}}" >
+                    <button type="button" class="btn btn-default"> <strong>Edit</strong></button>
+                    <!--input type="submit" value="Edit" -->
+                    </a>
+                </td>
+
+
+<!--		<td>
+                    <strong>{{ row['LangID'] }}</strong>
+                </td>
+
+                <td>
+                    <a href="/edits/{{row.id}}/" >
+                    <button type="button" class="btn btn-default"> <strong>Body</strong></button>
+                    <!input type="submit" value="Edit" >
+                    </a>
+                </td>
+-->
+
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+</div>
+
+
+{% endblock %}

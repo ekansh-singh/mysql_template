@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+
+<html>
+
+<head> 
+	<title>Online HTML Editor: Real time online with preview</title>
+	<link rel="stylesheet" href="http://css.staticjw.com/createdfiles/css-files/206792.css?m=5997" type="text/css" media="screen">
+	<script src="http://uploads.staticjw.com/on/onlinehtmleditordotnet/js-quicktags.js" type="text/javascript"></script>
+
+	<meta charset="utf-8">
+
+<script type="text/javascript">
+var old = '';
+function update()
+{
+  var textarea = document.f.ta;
+  var d = parent.dynamicframe.document;
+  if (old != textarea.value)
+  {
+    old = textarea.value;
+    d.open();
+    d.write(old);
+    d.close();
+  }
+  window.setTimeout(update, 150);
+}
+</script>
+</head>
+
+<body onload="update(); document.f.ta.select();">
+
+
+
+<iframe name="dynamicframe" id="dynamicframe" src="javascript:'-'"></iframe>
+
+
+
+
+<form name="f" id="dform" method="POST" action="/preview-edit/{{template_id}}">
+
+
+Description: <br/><input name="desc" type=text value="{{description}}" size="100"/> <br/><br/><br/>
+Subject: <br/><input name="subject" type=text value="{{subject}}" size="100"/> <br/><br/><br/>
+Body: <br/><textarea id="canvas" name="ta"  cols="140">
+{{content}}
+</textarea>
+
+<input type="submit" value="Save">
+</form>
+
+
+
+
+
+<style>
+#dynamicframe{height:700px;}
+
+</style>
+
+</body>
+
+ </html>
